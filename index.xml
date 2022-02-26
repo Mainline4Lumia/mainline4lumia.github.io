@@ -1,13 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Mainline4Lumia</title>
-    <link>https://mainline4lumia.github.io/</link>
-    <description>Recent content on Mainline4Lumia</description>
-    <image>
-      <url>https://avatars.githubusercontent.com/u/86826507</url>
-      <link>https://avatars.githubusercontent.com/u/86826507</link>
-    </image>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://mainline4lumia.github.io/index.xml" rel="self" type="application/rss+xml" />
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Mainline4Lumia</title><link>https://mainline4lumia.github.io/</link><description>Recent content on Mainline4Lumia</description><image><url>https://avatars.githubusercontent.com/u/86826507</url><link>https://avatars.githubusercontent.com/u/86826507</link></image><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://mainline4lumia.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>About us</title><link>https://mainline4lumia.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mainline4lumia.github.io/about/</guid><description>We are a team of 5 working on mainlining various Nokia &amp;amp; Microsoft Lumia phones.
+Because these devices were originally shipped with Windows Phone, it&amp;rsquo;s a slightly different process to most mainlined phones.
+We currently have atleast basic support for all Lumia devices based on the Qualcomm Snapdragon 400 chipset, and a few Lumia devices based on the Qualcomm Snapdragon 200 chipset.
+The team:
+Dominduchami Ivoszbg FieryFlames Rayyan Ansari SebaUbuntu You can find us in our various chats on:</description></item><item><title>Microsoft Lumia 640</title><link>https://mainline4lumia.github.io/devices/dempsey/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mainline4lumia.github.io/devices/dempsey/</guid><description>(dempsey)</description></item><item><title>Microsoft Lumia 640 XL</title><link>https://mainline4lumia.github.io/devices/makepeace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mainline4lumia.github.io/devices/makepeace/</guid><description>(makepeace)</description></item><item><title>Nokia Lumia 630/632/635/638</title><link>https://mainline4lumia.github.io/devices/moneypenny/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mainline4lumia.github.io/devices/moneypenny/</guid><description>(moneypenny)</description></item><item><title>Nokia Lumia 830</title><link>https://mainline4lumia.github.io/devices/tesla/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mainline4lumia.github.io/devices/tesla/</guid><description>(tesla)</description></item><item><title>Nokia/Microsoft Lumia 730/735</title><link>https://mainline4lumia.github.io/devices/superman/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mainline4lumia.github.io/devices/superman/</guid><description>(superman)</description></item></channel></rss>
