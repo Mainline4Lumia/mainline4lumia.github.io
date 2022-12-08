@@ -37,6 +37,7 @@ Once you have installed both tools, Click on "Unlock Bootloader" and follow the 
 After you have unlocked the bootloader of your phone, you will have to install the developer menu and bootshim onto your phone. This is made easy by our LumiaQuickStart script. To use it, clone the LumiaQuickStart repo (https://github.com/Mainline4Lumia/LumiaQuickStart). Then, use WPInternals to reboot your phone into mass storage mode. Now run `install.ps1` as administrator. Provide the path to EFIESP (Windows might also have mounted it inside MainOS). After the script is finished, you can install the 2nd stage bootloader(lk2nd).
 
 ## Step 3: Install lk2nd
+Download `lk2nd-msm8226.img` from https://github.com/msm8916-mainline/lk2nd/releases. Then, copy `lk2nd-msm8226.img` to your phone's EFIESP folder. Rename the `lk2nd_msm8226.img` to `emmc_appsboot.mbn`. Now, unmount mass storage and restart your phone by holding the volume down and power buttons for a few seconds.
 
 ## Step 4: Boot linux
 
