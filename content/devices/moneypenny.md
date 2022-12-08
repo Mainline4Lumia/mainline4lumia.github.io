@@ -28,4 +28,15 @@ summary: "(moneypenny)"
 
 # Installation
 
-Guide coming sometime in March 2022
+## Step 1: Unlock bootloader
+Download WPInternals(from https://github.com/ReneLergner/WPinternals/releases/latest) and Windows Device Recovery Tool (from https://support.microsoft.com/en-us/windows/windows-device-recovery-tool-faq-2b186f06-7178-ed11-4cb6-5ed437f0855b). WPInternals is a tool designed to unlock the bootloader and/or secure boot of select Lumia devices made by Nokia and Microsoft. Windows Device Recovery Tool is installed because it automatically installs all the drivers WPInternals will need.
+
+Once you have installed both tools, Click on "Unlock Bootloader" and follow the instructions to unlock your phone's bootloader.
+## Step 2: Install developer menu and bootshim
+
+After you have unlocked the bootloader of your phone, you will have to install the developer menu and bootshim onto your phone. This is made easy by our LumiaQuickStart script. To use it, clone the LumiaQuickStart repo (https://github.com/Mainline4Lumia/LumiaQuickStart). Then, use WPInternals to reboot your phone into mass storage mode. Now run `install.ps1` as administrator. Provide the path to EFIESP (Windows might also have mounted it inside MainOS). After the script is finished, you can install the 2nd stage bootloader(lk2nd).
+
+## Step 3: Install lk2nd
+
+## Step 4: Boot linux
+
