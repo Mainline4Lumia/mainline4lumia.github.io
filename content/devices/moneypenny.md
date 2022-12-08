@@ -40,4 +40,4 @@ After you have unlocked the bootloader of your phone, you will have to install t
 Download `lk2nd-msm8226.img` from https://github.com/msm8916-mainline/lk2nd/releases. Then, copy `lk2nd-msm8226.img` to your phone's EFIESP folder. Rename the `lk2nd_msm8226.img` to `emmc_appsboot.mbn`. Now, unmount mass storage and restart your phone by holding the volume down and power buttons for a few seconds.
 
 ## Step 4: Boot linux
-
+After you restart back to Windows Phone OS, restart your device once more. Hold the volume up button while the "NOKIA" logo is visible. If all goes well, your phone will boot lk2nd. From lk2nd, you can use the fastboot interface to boot linux.
