@@ -29,7 +29,7 @@ summary: "(moneypenny)"
 # Installation
 
 ## Step 1: Unlock bootloader
-Download WPInternals(from https://github.com/ReneLergner/WPinternals/releases/latest) and Windows Device Recovery Tool (from https://support.microsoft.com/en-us/windows/windows-device-recovery-tool-faq-2b186f06-7178-ed11-4cb6-5ed437f0855b). WPInternals is a tool designed to unlock the bootloader and/or secure boot of select Lumia devices made by Nokia and Microsoft. Windows Device Recovery Tool is installed because it automatically installs all the drivers WPInternals will need.
+Download WPInternals (from https://github.com/ReneLergner/WPinternals/releases/latest) and Windows Device Recovery Tool (from https://support.microsoft.com/en-us/windows/windows-device-recovery-tool-faq-2b186f06-7178-ed11-4cb6-5ed437f0855b). WPInternals is a tool designed to unlock the bootloader and/or secure boot of select Lumia devices made by Nokia and Microsoft. Windows Device Recovery Tool is installed because it automatically installs all the drivers WPInternals will need.
 
 Once you have installed both tools, Click on "Unlock Bootloader" and follow the instructions to unlock your phone's bootloader.
 ## Step 2: Install developer menu and bootshim
@@ -41,3 +41,5 @@ Download `lk2nd-msm8226.img` from https://github.com/msm8916-mainline/lk2nd/rele
 
 ## Step 4: Boot linux
 After you restart back to Windows Phone OS, restart your device once more. Hold the volume up button while the "NOKIA" logo is visible. If all goes well, your phone will boot lk2nd. From lk2nd, you can use the fastboot interface to boot linux.
+
+Download the Android SDK Platform Tools (from https://developer.android.com/studio/releases/platform-tools) to use fastboot. Ensure your phone is connected to your computer. Rename your kernel image to `boot.img`. Then, run `fastboot boot boot.img` to boot the kernel on your phone.
