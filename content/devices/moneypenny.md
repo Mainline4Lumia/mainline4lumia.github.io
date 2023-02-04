@@ -19,7 +19,7 @@ summary: "(moneypenny)"
 | GPS | No |
 | Mobile data | No |
 | SMS | No |
-| Calls | No |
+| Calls | Partial |
 | NFC | Yes |
 | LED(s) | No |
 | ALS/PRX | Yes |
