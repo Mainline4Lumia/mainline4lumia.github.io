@@ -3,7 +3,7 @@ title: "Microsoft Lumia 640"
 summary: "(dempsey)"
 ---
 
-![Microsoft Lumia 640 front and back](/static/dempsey.png)
+![Microsoft Lumia 640 front and back](/static/img/dempsey.png)
 # Support matrix
 | Feature | Supported |
 | --- | ----------- |
