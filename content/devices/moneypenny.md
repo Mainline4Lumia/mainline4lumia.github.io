@@ -3,7 +3,7 @@ title: "Nokia Lumia 630/632/635/638"
 summary: "(moneypenny)"
 ---
 
-![Nokia Lumia 630 front and back](static/200px-Moneypenny_sxmo.png)
+![Nokia Lumia 630 front and back](https://github.com/chmod-rwx/mainline4lumia.github.io/blob/main/static/200px-Moneypenny_sxmo.png?raw=true)
 # Support matrix
 | Feature | Supported |
 | --- | ----------- |
