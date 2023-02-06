@@ -30,4 +30,4 @@ The capacitive buttons are not supported right now. This needs a driver for Syna
 
 # Installation
 
-FIXME
+See [Install](/install)

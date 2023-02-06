@@ -28,4 +28,4 @@ summary: "(superman)"
 
 # Installation
 
-FIXME
+See [Install](/install)

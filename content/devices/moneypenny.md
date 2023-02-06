@@ -27,4 +27,4 @@ summary: "(moneypenny)"
 
 # Installation
 
-FIXME
+See [Install](/install)

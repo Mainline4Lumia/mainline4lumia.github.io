@@ -30,4 +30,4 @@ Camera flash is using PMIC VFLASH
 
 # Installation
 
-FIXME
+See [Install](/install)
