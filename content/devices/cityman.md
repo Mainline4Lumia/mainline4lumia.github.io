@@ -79,7 +79,3 @@ This device share its platform (octagon) with [Microsoft Lumia 950 (talkman)](/d
 | Hall sensor | Yes |
 | Magnetometer sensor | Yes |
 | Proximity sensor | Yes |
-
-# Installation
-
-See [Install](/install)

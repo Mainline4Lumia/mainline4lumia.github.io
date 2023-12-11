@@ -27,7 +27,3 @@ summary: "tesla"
 # Notes
 
 The capacitive buttons are not supported right now. This needs a driver for Synaptics RMI4 Functon 1A.
-
-# Installation
-
-See [Install](/install)

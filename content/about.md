@@ -1,7 +1,8 @@
-+++
-title = "About us"
-aliases = ["about-us", "contact"]
-+++
+---
+title: "About us"
+aliases: ["about-us", "contact"]
+---
+
 We are a team of 5 working on mainlining various Nokia & Microsoft Lumia phones.
 
 Because these devices were originally shipped with Windows Phone, it's a slightly different process to most mainlined phones.

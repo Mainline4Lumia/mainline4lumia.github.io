@@ -1,7 +1,8 @@
-+++
-title = "Install guide"
-aliases = ["install", "guide"]
-+++
+---
+title: "Install guide"
+summary: "Linux installation guide"
+aliases: ["install", "guide"]
+---
 
 **This is not ready to be installed.**
 

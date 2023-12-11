@@ -25,7 +25,3 @@ summary: "superman"
 | ALS/PRX | Yes |
 
 # Notes
-
-# Installation
-
-See [Install](/install)

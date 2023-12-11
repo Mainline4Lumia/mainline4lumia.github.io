@@ -45,4 +45,8 @@ paginate = 5
     name = "Devices"
     url = "/devices/"
     weight = 2
-
+  [[menu.main]]
+    identifier = "guides"
+    name = "Guides"
+    url = "/guides/"
+    weight = 3

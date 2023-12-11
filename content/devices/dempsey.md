@@ -27,7 +27,3 @@ summary: "dempsey"
 # Notes
 
 Camera flash is using PMIC VFLASH
-
-# Installation
-
-See [Install](/install)

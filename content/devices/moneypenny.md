@@ -24,7 +24,3 @@ summary: "moneypenny"
 | ALS/PRX | Yes |
 
 # Notes
-
-# Installation
-
-See [Install](/install)
