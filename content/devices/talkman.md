@@ -69,7 +69,7 @@ This device share its platform (octagon) with [Microsoft Lumia 950 XL (cityman)]
 | Audio | No |
 | GPS | No |
 | NFC | Yes |
-| FM radio | No |
+| FM radio | Yes |
 | Camera | No |
 | Accelerometer sensor | Yes |
 | Ambient light sensor | Yes |
