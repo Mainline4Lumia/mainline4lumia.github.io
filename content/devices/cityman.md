@@ -41,12 +41,12 @@ summary: "(cityman)"
 
 # Current status
 
-{{< notice info >}}
+{{< notice note >}}
 This device has been upstreamed to the mainline kernel thanks to Gustave Monce (gus33000) and Konrad Dybcio (konradybcio). This page exists mostly to track the progress of the device since it's used as a reference device for other related projects like Android.
 {{< /notice >}}
 
-{{< notice info >}}
-This device share its platform (octagon) with [Microsoft Lumia 950 XL (cityman)](/devices/cityman).
+{{< notice note >}}
+This device share its platform (octagon) with [Microsoft Lumia 950 (talkman)](/devices/talkman).
 {{< /notice >}}
 
 | Feature | Supported |
