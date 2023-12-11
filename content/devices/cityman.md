@@ -42,7 +42,7 @@ summary: "cityman"
 # Current status
 
 {{< notice note >}}
-This device has been upstreamed to the mainline kernel thanks to Gustave Monce (gus33000) and Konrad Dybcio (konradybcio). This page exists mostly to track the progress of the device since it's used as a reference device for other related projects like Android.
+This device has been upstreamed thanks to Gustave Monce (gus33000) and Konrad Dybcio (konradybcio). This page exists mostly to track the progress of the device since it's used as a reference device for other related projects like Android.
 {{< /notice >}}
 
 {{< notice note >}}
