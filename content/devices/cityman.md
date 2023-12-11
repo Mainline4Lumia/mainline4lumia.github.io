@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Lumia 950 XL"
-summary: "(cityman)"
+summary: "cityman"
 ---
 
 ![Microsoft Lumia 950 XL front](/img/cityman.png)

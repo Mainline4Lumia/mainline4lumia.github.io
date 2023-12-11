@@ -1,6 +1,6 @@
 ---
 title: "Nokia/Microsoft Lumia 730/735"
-summary: "(superman)"
+summary: "superman"
 ---
 
 ![Nokia Lumia 730 front](/img/superman.png)

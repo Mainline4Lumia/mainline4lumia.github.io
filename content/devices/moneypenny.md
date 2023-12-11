@@ -1,6 +1,6 @@
 ---
 title: "Nokia Lumia 630/632/635/638"
-summary: "(moneypenny)"
+summary: "moneypenny"
 ---
 
 ![Nokia Lumia 630 front and back](/img/moneypenny.png)

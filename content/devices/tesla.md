@@ -1,6 +1,6 @@
 ---
 title: "Nokia Lumia 830"
-summary: "(tesla)"
+summary: "tesla"
 ---
 
 ![Nokia Lumia 830 front and back](/img/tesla.png)

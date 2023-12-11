@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Lumia 950"
-summary: "(talkman)"
+summary: "talkman"
 ---
 
 ![Microsoft Lumia 950 front](/img/talkman.png)

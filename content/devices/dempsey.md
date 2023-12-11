@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Lumia 640"
-summary: "(dempsey)"
+summary: "dempsey"
 ---
 
 ![Microsoft Lumia 640 front and back](/img/dempsey.png)
