@@ -1,0 +1,144 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Android tips | Mainline4Lumia</title>
+<meta name=keywords content>
+<meta name=description content="Android handbook for mainlined devices">
+<meta name=author content>
+<link rel=canonical href=https://mainline4lumia.github.io/guides/android/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://mainline4lumia.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://mainline4lumia.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://mainline4lumia.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://mainline4lumia.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://mainline4lumia.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript><meta property="og:title" content="Android tips">
+<meta property="og:description" content="Android handbook for mainlined devices">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mainline4lumia.github.io/guides/android/"><meta property="og:image" content="https://avatars.githubusercontent.com/u/86826507"><meta property="article:section" content="guides">
+<meta property="og:site_name" content="Mainline4Lumia">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://avatars.githubusercontent.com/u/86826507">
+<meta name=twitter:title content="Android tips">
+<meta name=twitter:description content="Android handbook for mainlined devices">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Guides","item":"https://mainline4lumia.github.io/guides/"},{"@type":"ListItem","position":3,"name":"Android tips","item":"https://mainline4lumia.github.io/guides/android/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Android tips","name":"Android tips","description":"Android handbook for mainlined devices","keywords":[],"articleBody":"While bringing up Linux for these devices is our main focus, we would also like to make it work with Android. We think that Android is a good way to “stress” all the devices' features and it might also be a good way to gain more users and have more reports.\nThis page will contain some useful information regarding Android and its support for mainline kernels.\nFor reference, we maintain a common Android device tree that is used for all of our supported devices. You can find it here.\nKernel Typically tagged Android releases (aka major releases like Android 13) only works with LTS kernels.\nIf you want to directly use the latest mainline kernel, it is highly recommended to use the main branch of the Android Open Source Project (AOSP). Use the android-mainline branch from Android common kernel tree to make sure you have all the required patches. You will also need to apply the Android config fragment to your kernel config.\nThe fastest way to get started is to build the latest AOSP release and build a LTS GKI (Generic Kernel Image). You can then use the gki_defconfig kernel config and write a GKI fragment making sure only the drivers your devices needs will be built.\nNXP wrote a nice introduction to GKI for their products, you can find it here.\nBonus: If you build a custom ROM like LineageOS, you will be able to build the kernel inline with the ROM, which will make it easier to build the kernel together with the required modules.\nGraphics Without GPU Android is able to boot even when the GPU hasn’t been bringed up yet, of course, you must have something to draw onto, typically achieved with a framebuffer provided by the bootloader.\nAll you have to do is:\n Make sure /dev/fb0 exists and works (you can try booting the Android recovery to quickly check if Android likes it)  If it doesn’t exist, try to set the video kernel command line parameter (e.g. with efifb, set it to video=efifb)   Build android.hardware.graphics.composer@2.2-service (the framebuffer adapter doesn’t implement the methods required by newer versions, @2.1 would work too) Build gralloc.default together with @2.0 allocator and @2.1 mapper HIDL implementations Build ANGLE + SwiftShader’s pastel Vulkan HAL  With GPU Unless you want to write a custom hwcomposer and gralloc HALs, you should be using the DRM subsystem. Android has a fairly good support for DRM, considering mesa is also available at external/mesa.\n  First of all, you must build the DRM hwcomposer HAL, hwcomposer.drm, located in external/drm_hwcomposer. This is a HWC2 HAL, so it should work with the latest hwcomposer HIDL service available in your sources.\n  For EGL, you can either use mesa or ANGLE (located in external/angle) implementations. Keep in mind that ANGLE is a OpenGL ES to Vulkan translation layer, so it will require a Vulkan implementation to work (see below).\n  For Vulkan, you can either use mesa if your GPU has native Vulkan support and it is supported, or use SwiftShader’s pastel software implementation. Keep in mind that providing a Vulkan implementation is not required for Android to boot unless you use ANGLE EGL, so you can skip this step.\n  For the graphic allocator, the easiest way is to use minigbm (located in external/minigbm). As of writing, it supports the following drivers:\n amdgpu evdi i915 komeda marvell mediatek meson msm nouveau radeon sun4i-drm synaptics udl vc4 vkms rockchip  Most of these drivers are implemented using the DRM_IOCTL_MODE_CREATE_DUMB ioctl to allocate buffer objects. You can add support for your driver this way by editing the dumb_driver.c file and adding an alias for your driver name. If you want to actually implement a proper allocator, feel free to do so, you can also submit your patch to AOSP Gerrit.\nSome drivers (like msm) have a dedicated target, which should be more optimized than the generic one. Be sure to check the Android.bp configuration to see if your driver has one of them.\n  Refer to device/linaro/dragonboard device tree configuration for an example.\n","wordCount":"668","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://mainline4lumia.github.io/guides/android/"},"publisher":{"@type":"Organization","name":"Mainline4Lumia","logo":{"@type":"ImageObject","url":"https://mainline4lumia.github.io/favicon.ico"}}}</script>
+</head>
+<body class=dark id=top>
+<script>localStorage.getItem("pref-theme")==="light"&&document.body.classList.remove('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://mainline4lumia.github.io accesskey=h title="Mainline4Lumia (Alt + H)">Mainline4Lumia</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://mainline4lumia.github.io/about/ title=About>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://mainline4lumia.github.io/devices/ title=Devices>
+<span>Devices</span>
+</a>
+</li>
+<li>
+<a href=https://mainline4lumia.github.io/guides/ title=Guides>
+<span>Guides</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<h1 class=post-title>
+Android tips
+</h1>
+<div class=post-meta>
+</div>
+</header>
+<div class=post-content><p>While bringing up Linux for these devices is our main focus, we would also like to make it work with Android. We think that Android is a good way to &ldquo;stress&rdquo; all the devices' features and it might also be a good way to gain more users and have more reports.</p>
+<p>This page will contain some useful information regarding Android and its support for mainline kernels.</p>
+<p>For reference, we maintain a common Android device tree that is used for all of our supported devices. You can find it <a href=https://github.com/Mainline4Lumia/android_device_linux_mainline-common>here</a>.</p>
+<h2 id=kernel>Kernel<a hidden class=anchor aria-hidden=true href=#kernel>#</a></h2>
+<p>Typically tagged Android releases (aka major releases like Android 13) only works with LTS kernels.</p>
+<p>If you want to directly use the latest mainline kernel, it is highly recommended to use the <code>main</code> branch of the Android Open Source Project (AOSP). Use the <code>android-mainline</code> branch from Android common kernel tree to make sure you have all the required patches. You will also need to apply the Android config fragment to your kernel config.</p>
+<p>The fastest way to get started is to build the latest AOSP release and build a LTS GKI (Generic Kernel Image). You can then use the <code>gki_defconfig</code> kernel config and write a GKI fragment making sure only the drivers your devices needs will be built.</p>
+<p>NXP wrote a nice introduction to GKI for their products, you can find it <a href=https://community.nxp.com/t5/i-MX-Processors-Knowledge-Base/i-MX-Android-12-GKI-General-Kernel-Image-development-tips/ta-p/1600993>here</a>.</p>
+<p>Bonus: If you build a custom ROM like LineageOS, you will be able to build the kernel inline with the ROM, which will make it easier to build the kernel together with the required modules.</p>
+<h2 id=graphics>Graphics<a hidden class=anchor aria-hidden=true href=#graphics>#</a></h2>
+<h3 id=without-gpu>Without GPU<a hidden class=anchor aria-hidden=true href=#without-gpu>#</a></h3>
+<p>Android is able to boot even when the GPU hasn&rsquo;t been bringed up yet, of course, you must have something to draw onto, typically achieved with a framebuffer provided by the bootloader.</p>
+<p>All you have to do is:</p>
+<ul>
+<li>Make sure <code>/dev/fb0</code> exists and works (you can try booting the Android recovery to quickly check if Android likes it)
+<ul>
+<li>If it doesn&rsquo;t exist, try to set the <code>video</code> kernel command line parameter (e.g. with <code>efifb</code>, set it to <code>video=efifb</code>)</li>
+</ul>
+</li>
+<li>Build <code>android.hardware.graphics.composer@2.2-service</code> (the framebuffer adapter doesn&rsquo;t implement the methods required by newer versions, <code>@2.1</code> would work too)</li>
+<li>Build <code>gralloc.default</code> together with <code>@2.0</code> allocator and <code>@2.1</code> mapper HIDL implementations</li>
+<li>Build <code>ANGLE</code> + SwiftShader&rsquo;s <code>pastel</code> Vulkan HAL</li>
+</ul>
+<h3 id=with-gpu>With GPU<a hidden class=anchor aria-hidden=true href=#with-gpu>#</a></h3>
+<p>Unless you want to write a custom hwcomposer and gralloc HALs, you should be using the DRM subsystem. Android has a fairly good support for DRM, considering <code>mesa</code> is also available at <code>external/mesa</code>.</p>
+<ul>
+<li>
+<p>First of all, you must build the DRM hwcomposer HAL, <code>hwcomposer.drm</code>, located in <code>external/drm_hwcomposer</code>. This is a HWC2 HAL, so it should work with the latest hwcomposer HIDL service available in your sources.</p>
+</li>
+<li>
+<p>For EGL, you can either use <code>mesa</code> or <code>ANGLE</code> (located in <code>external/angle</code>) implementations. Keep in mind that <code>ANGLE</code> is a OpenGL ES to Vulkan translation layer, so it will require a Vulkan implementation to work (see below).</p>
+</li>
+<li>
+<p>For Vulkan, you can either use <code>mesa</code> if your GPU has native Vulkan support and it is supported, or use SwiftShader&rsquo;s <code>pastel</code> software implementation. Keep in mind that providing a Vulkan implementation is not required for Android to boot unless you use <code>ANGLE</code> EGL, so you can skip this step.</p>
+</li>
+<li>
+<p>For the graphic allocator, the easiest way is to use <code>minigbm</code> (located in <code>external/minigbm</code>). As of writing, it supports the following drivers:</p>
+<ul>
+<li>amdgpu</li>
+<li>evdi</li>
+<li>i915</li>
+<li>komeda</li>
+<li>marvell</li>
+<li>mediatek</li>
+<li>meson</li>
+<li>msm</li>
+<li>nouveau</li>
+<li>radeon</li>
+<li>sun4i-drm</li>
+<li>synaptics</li>
+<li>udl</li>
+<li>vc4</li>
+<li>vkms</li>
+<li>rockchip</li>
+</ul>
+<p>Most of these drivers are implemented using the <code>DRM_IOCTL_MODE_CREATE_DUMB</code> ioctl to allocate buffer objects. You can add support for your driver this way by editing the dumb_driver.c file and adding an alias for your driver name. If you want to actually implement a proper allocator, feel free to do so, you can also submit your patch to AOSP Gerrit.</p>
+<p>Some drivers (like <code>msm</code>) have a dedicated target, which should be more optimized than the generic one. Be sure to check the <code>Android.bp</code> configuration to see if your driver has one of them.</p>
+</li>
+</ul>
+<p>Refer to <code>device/linaro/dragonboard</code> device tree configuration for an example.</p>
+</div>
+<footer class=post-footer>
+</footer>
+</article>
+</main>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
