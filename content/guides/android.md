@@ -1,7 +1,6 @@
 ---
 title: "Android tips"
 summary: "Android handbook for mainlined devices"
-draft: true
 ---
 
 While bringing up Linux for these devices is our main focus, we would also like to make it work with Android. We think that Android is a good way to "stress" all the devices' features and it might also be a good way to gain more users and have more reports.
@@ -30,11 +29,42 @@ Android is able to boot even when the GPU hasn't been bringed up yet, of course,
 
 All you have to do is:
 - Make sure `/dev/fb0` exists and works (you can try booting the Android recovery to quickly check if Android likes it)
-  - If it doesn't exist, try to set the `video` kernel command line parameter (e.g. with efifb, set it to `video=efifb`)
+  - If it doesn't exist, try to set the `video` kernel command line parameter (e.g. with `efifb`, set it to `video=efifb`)
 - Build `android.hardware.graphics.composer@2.2-service` (the framebuffer adapter doesn't implement the methods required by newer versions, `@2.1` would work too)
 - Build `gralloc.default` together with `@2.0` allocator and `@2.1` mapper HIDL implementations
 - Build `ANGLE` + SwiftShader's `pastel` Vulkan HAL
 
 ### With GPU
 
-Android supports using mesa as a hardware composer and a graphics allocator. This is the recommended way to use a GPU with Android. Refer to device/linaro/dragonboard configuration for this case.
+Unless you want to write a custom hwcomposer and gralloc HALs, you should be using the DRM subsystem. Android has a fairly good support for DRM, considering `mesa` is also available at `external/mesa`.
+
+- First of all, you must build the DRM hwcomposer HAL, `hwcomposer.drm`, located in `external/drm_hwcomposer`. This is a HWC2 HAL, so it should work with the latest hwcomposer HIDL service available in your sources.
+
+- For EGL, you can either use `mesa` or `ANGLE` (located in `external/angle`) implementations. Keep in mind that `ANGLE` is a OpenGL ES to Vulkan translation layer, so it will require a Vulkan implementation to work (see below).
+
+- For Vulkan, you can either use `mesa` if your GPU has native Vulkan support and it is supported, or use SwiftShader's `pastel` software implementation. Keep in mind that providing a Vulkan implementation is not required for Android to boot unless you use `ANGLE` EGL, so you can skip this step.
+
+- For the graphic allocator, the easiest way is to use `minigbm` (located in `external/minigbm`). As of writing, it supports the following drivers:
+
+    - amdgpu
+    - evdi
+    - i915
+    - komeda
+    - marvell
+    - mediatek
+    - meson
+    - msm
+    - nouveau
+    - radeon
+    - sun4i-drm
+    - synaptics
+    - udl
+    - vc4
+    - vkms
+    - rockchip
+
+    Most of these drivers are implemented using the `DRM_IOCTL_MODE_CREATE_DUMB` ioctl to allocate buffer objects. You can add support for your driver this way by editing the dumb_driver.c file and adding an alias for your driver name. If you want to actually implement a proper allocator, feel free to do so, you can also submit your patch to AOSP Gerrit.
+
+    Some drivers (like `msm`) have a dedicated target, which should be more optimized than the generic one. Be sure to check the `Android.bp` configuration to see if your driver has one of them.
+
+Refer to `device/linaro/dragonboard` device tree configuration for an example.
